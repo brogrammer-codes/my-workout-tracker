@@ -7,7 +7,7 @@ import { capitalizeString } from '@/utils/formats';
 import {HiChevronDoubleDown, HiChevronDoubleLeft, HiChevronDoubleRight} from 'react-icons/hi'
 
 
-const TaskNode = ({ node, elements, addTask, depth, deleteTask }) => {
+const TaskNode = ({ node, elements, addTask, depth }) => {
   const childElements = elements.filter(el => el.parent_id === node.id);
   const [expanded, setExpanded] = useState(false);
   return (
@@ -27,14 +27,14 @@ const TaskNode = ({ node, elements, addTask, depth, deleteTask }) => {
       </HStack>
       {expanded && (<List spacing={2}>
         {childElements.map(child => (
-          <TaskNode key={child.id} node={child} elements={elements} addTask={addTask} depth={depth + 1} deleteTask={deleteTask} />
+          <TaskNode key={child.id} node={child} elements={elements} depth={depth + 1}  />
         ))}
       </List>)}
     </ListItem>
   )
 }
 
-export const TaskTree = ({ elements, addTask, parentId = null, deleteTask }) => {
+export const TaskTree = ({ elements, parentId = null, }) => {
   if (elements.length) {
 
     const rootElements = elements.filter(el => el.parent_id === parentId);
@@ -46,9 +46,6 @@ export const TaskTree = ({ elements, addTask, parentId = null, deleteTask }) => 
               key={root.id}
               node={root}
               elements={elements}
-              addTask={addTask}
-              deleteTask={deleteTask}
-              depth={0}
             />))}
         </List>
       </Box>
