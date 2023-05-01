@@ -59,7 +59,7 @@ export default function LoginPage() {
       })
     }
     if (user?.user?.id) {
-      router.push(`user/${user.user.id}`)
+      router.push(`profiles/${user.user.id}`)
     }
   }, [user]);
   return (

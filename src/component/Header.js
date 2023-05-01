@@ -15,7 +15,7 @@ const Header = () => {
         { name: "Home", href: "/" },         
         { name: "Profiles", href: "/profiles" },
         { name: "Folders", href: "/task" },
-        { name: "User", href: `/user/${user?.user?.id}` },
+        { name: "User", href: `/profiles/${user?.user?.id}` },
       ])
     } else {
       setMenuItems([

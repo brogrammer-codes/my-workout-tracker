@@ -9,5 +9,6 @@ export const searchActivity = (params) => {
         params,
     };
     return axios(options)
-        .then(({data}) => data[0]);
+        .then(({data}) => data[0])
+        .catch((error) => console.log(error));
 }

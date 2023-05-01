@@ -35,7 +35,7 @@ const TaskNode = ({ node, elements, addTask, depth }) => {
 }
 
 export const TaskTree = ({ elements, parentId = null, }) => {
-  if (elements.length) {
+  if (elements && elements.length) {
 
     const rootElements = elements.filter(el => el.parent_id === parentId);
     return (
@@ -46,6 +46,7 @@ export const TaskTree = ({ elements, parentId = null, }) => {
               key={root.id}
               node={root}
               elements={elements}
+              depth={0}
             />))}
         </List>
       </Box>
