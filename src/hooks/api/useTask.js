@@ -66,6 +66,7 @@ export const useTask = () => {
   };
 
   const updateTask = async (task) => {
+    setloading(true)
     await patchTask(task).then(({task}) => {
       const newTaskTree = taskTree.filter((e) => e?.id !== task?.id)
       setTaskTree([...newTaskTree, task])
@@ -76,6 +77,7 @@ export const useTask = () => {
         duration: 4000,
         isClosable: true,
       })
+      setloading(false)
     }).catch((e) => setError(e))
   };
 
@@ -93,6 +95,7 @@ export const useTask = () => {
   };
   
   const copyTaskToShared = async (task_id) => {
+    setloading(true)
     await createSharedTask(task_id,).then(({task}) => {
       toast({
         title: `${task?.type} shared`,
@@ -101,6 +104,7 @@ export const useTask = () => {
         duration: 4000,
         isClosable: true,
       })
+      setloading(false)
     }).catch((e) => setError(e))
   }
   

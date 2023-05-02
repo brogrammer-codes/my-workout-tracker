@@ -20,8 +20,8 @@ const TaskNode = ({ node, elements, addTask, depth }) => {
         )}
         {/* <Text ml={2} color={'brand.50'}>{depth > 1 && `${capitalizeString(node?.type)}: `} {capitalizeString(node.name)}</Text> */}
         {node?.type !== TASK_TYPES.ACTIVITY ?
-        <Link aria-label='open-task-icon' href={`/${node?.type}/${node?.id}`}><Text ml={2} color={'brand.50'}>{depth > 1 && `${capitalizeString(node?.type)}: `} {capitalizeString(node.name)}</Text></Link>:
-          <Text ml={2} color={'brand.50'}>{depth > 1 && `${capitalizeString(node?.type)}: `} {capitalizeString(node.name)}</Text>
+        <Link aria-label='open-task-icon' href={`/${node?.type}/${node?.id}`}><Text ml={2} color={'brand.50'}>{depth > 1 && `${capitalizeString(node?.type)}: `} {capitalizeString(node.name)}{node?.complate && '(complete)'}</Text></Link>:
+          <Text ml={2} color={'brand.50'}>{depth > 1 && `${capitalizeString(node?.type)}: `} {capitalizeString(node.name)} {node?.complate && '(complete)'}</Text>
         }
 
       </HStack>

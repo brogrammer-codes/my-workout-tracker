@@ -1,13 +1,15 @@
 import React from 'react'
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { Box, Heading, Input, Button, Text, Stack, Center, Spinner, Grid, GridItem, SimpleGrid } from '@chakra-ui/react';
+import { Box, Heading, Input, Button, Text, Stack, Flex, Spinner, Grid, GridItem, SimpleGrid, Spacer } from '@chakra-ui/react';
 import { TaskTree } from '@/component/TaskTree';
 import { useTaskListContext } from '@/context/context';
 import { ActivityPicker } from '@/component/TaskModal/ActivityPicker';
 import PageLoading from '@/component/PageLoading';
 import { TASK_TYPES } from '@/utils/constants';
 import { PlanTable } from '@/component/TaskTable';
+import moment from 'moment';
+import { dateFormatMonthDayTime } from '@/utils/formats';
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -77,45 +79,20 @@ const ProfilePage = () => {
               <Button colorScheme='red' onClick={logoutUser} isLoading={userLoading}>Sign Out</Button>
             </Stack>}
         </form>
-        {/* <Text>Num complete tasks: {profile?.complete_tasks?.length}</Text> */}
-        {/* <SimpleGrid columns={[1, null, 2]} spacing={10} paddingTop={4} >
-          <Box mb={4} bg={'brand.500'} borderRadius={'lg'} padding={3} maxW={500}>
-            <Text as='b' fontSize={'2xl'}>Shared Tree</Text>
-            <TaskTree elements={pageProfile?.shared_tasks} />
-          </Box>
-          <Box  mb={4} bg={'brand.500'} borderRadius={'lg'} padding={3} maxW={500}>
-            <Text as='b' fontSize={'2xl'}>Shared Plans</Text>
-            {
-              sharedPlans.map((plan) => (
-                <Box key={plan?.id}>
-                  <Text>{plan?.name}</Text>
-                  <Text fontSize='xs'>{plan?.description}</Text>
-                </Box>
-              ))
-            }
-          </Box>
-          <Box mb={4} bg={'brand.500'} borderRadius={'lg'} padding={3} maxW={500}>
-            <Text as='b' fontSize={'2xl'}>Shared Activities</Text>
-            {
-              sharedAct.map((act) => (
-                <Box key={act?.id}>
-                  <Text>{act?.name}</Text>
-                  <Text fontSize='xs'>{act?.description}</Text>
-                </Box>
-              ))
-            }
-          </Box>
-        </SimpleGrid> */}
         <Stack>
-        {
-              sharedPlans.map((plan) => (
-                <Box key={plan?.id} >
-                <Text as='b' fontSize={'2xl'}>{plan?.name}</Text>
+          {
+            sharedPlans.map((plan) => (
+              <Box key={plan?.id} maxW={1000}>
+                <Flex>
+                  <Text as='b' fontSize={'2xl'}>{plan?.name}</Text>
+                  <Spacer />
+                  <Text>Shared on: {moment(plan?.inserted_at).format(dateFormatMonthDayTime)}</Text>
+                </Flex>
                 <Text fontSize={'xs'}>{plan?.description}</Text>
-                <PlanTable pageTask={plan} taskTree={pageProfile?.shared_tasks} isEditable={false}/>
-                </Box>
-              ))
-            }
+                <PlanTable pageTask={plan} taskTree={pageProfile?.shared_tasks} isEditable={false} />
+              </Box>
+            ))
+          }
         </Stack>
       </Box>
     </PageLoading>
