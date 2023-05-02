@@ -10,6 +10,7 @@ import { TASK_TYPES } from '@/utils/constants';
 import { PlanTable } from '@/component/TaskTable';
 import moment from 'moment';
 import { dateFormatMonthDayTime } from '@/utils/formats';
+import { ProfilePlan } from '@/component/ProfilePlan';
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -79,9 +80,14 @@ const ProfilePage = () => {
               <Button colorScheme='red' onClick={logoutUser} isLoading={userLoading}>Sign Out</Button>
             </Stack>}
         </form>
-        <Stack>
+        <Stack paddingTop={3}>
           {
             sharedPlans.map((plan) => (
+              <ProfilePlan key={plan?.id} plan={plan} taskTree={pageProfile?.shared_tasks} />
+            ))
+          }
+        </Stack>
+        {/* 
               <Box key={plan?.id} maxW={1000}>
                 <Flex>
                   <Text as='b' fontSize={'2xl'}>{plan?.name}</Text>
@@ -91,9 +97,7 @@ const ProfilePage = () => {
                 <Text fontSize={'xs'}>{plan?.description}</Text>
                 <PlanTable pageTask={plan} taskTree={pageProfile?.shared_tasks} isEditable={false} />
               </Box>
-            ))
-          }
-        </Stack>
+      */}
       </Box>
     </PageLoading>
   );
