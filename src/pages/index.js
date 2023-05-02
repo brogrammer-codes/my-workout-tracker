@@ -18,7 +18,7 @@ const Home = () => {
         </Text>
           <Text fontSize={'lg'}>Check out my youtube channel for some details on how to use this application as well as a look at how it is being developed. </Text>
           <AspectRatio maxW='560px' ratio={4/3}>
-          <iframe src="https://www.youtube.com/embed/videoseries?list=PLb0gleyz8hLXZfKciuHsJyPrAnLddXBwh" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/videoseries?list=PLb0gleyz8hLXZfKciuHsJyPrAnLddXBwh" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
           </AspectRatio >
 
 

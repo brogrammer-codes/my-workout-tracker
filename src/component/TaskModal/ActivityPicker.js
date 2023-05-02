@@ -18,7 +18,7 @@ export const ActivityPicker = ({ setActivity, activity, isDisabled }) => {
 
   useEffect(() => {
     try {
-      searchActivity({ keyword: activity?.name }).then(({ task }) => setCurrentActivities([...task]))
+      searchActivity({ keyword: activity?.name }).then(({ task = [] }) => setCurrentActivities([...task]))
       
     } catch (error) {
       

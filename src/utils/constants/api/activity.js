@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API = process.env.NEXT_PUBLIC_API_URL || '';
 
-export const searchActivity = (params) => {
+export const searchActivity = async (params) => {
     const options = {
         method: 'GET',
         url:  `${API}/task/type?type=activity`,
@@ -10,5 +10,5 @@ export const searchActivity = (params) => {
     };
     return axios(options)
         .then(({data}) => data[0])
-        .catch((error) => console.log(error));
+        .catch((error) => []);
 }
