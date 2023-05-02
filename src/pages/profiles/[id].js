@@ -7,6 +7,7 @@ import { useTaskListContext } from '@/context/context';
 import { ActivityPicker } from '@/component/TaskModal/ActivityPicker';
 import PageLoading from '@/component/PageLoading';
 import { TASK_TYPES } from '@/utils/constants';
+import { PlanTable } from '@/component/TaskTable';
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -31,7 +32,7 @@ const ProfilePage = () => {
   }, [id, profiles, user])
   useEffect(() => {
     if (pageProfile && pageProfile?.shared_tasks?.length) {
-      const currentPlans = pageProfile?.shared_tasks.filter((task) => task?.type === TASK_TYPES.PLAN)
+      const currentPlans = pageProfile?.shared_tasks.filter((task) => task?.parent_id === null)
       const currentAct = pageProfile?.shared_tasks.filter((task) => task?.type === TASK_TYPES.ACTIVITY)
       setSharedPlans([...currentPlans])
       setSharedAct([...currentAct])
@@ -77,7 +78,7 @@ const ProfilePage = () => {
             </Stack>}
         </form>
         {/* <Text>Num complete tasks: {profile?.complete_tasks?.length}</Text> */}
-        <SimpleGrid columns={[1, null, 2]} spacing={10} paddingTop={4} >
+        {/* <SimpleGrid columns={[1, null, 2]} spacing={10} paddingTop={4} >
           <Box mb={4} bg={'brand.500'} borderRadius={'lg'} padding={3} maxW={500}>
             <Text as='b' fontSize={'2xl'}>Shared Tree</Text>
             <TaskTree elements={pageProfile?.shared_tasks} />
@@ -88,7 +89,7 @@ const ProfilePage = () => {
               sharedPlans.map((plan) => (
                 <Box key={plan?.id}>
                   <Text>{plan?.name}</Text>
-                  <Text>{plan?.description}</Text>
+                  <Text fontSize='xs'>{plan?.description}</Text>
                 </Box>
               ))
             }
@@ -104,7 +105,18 @@ const ProfilePage = () => {
               ))
             }
           </Box>
-        </SimpleGrid>
+        </SimpleGrid> */}
+        <Stack>
+        {
+              sharedPlans.map((plan) => (
+                <Box key={plan?.id} >
+                <Text as='b' fontSize={'2xl'}>{plan?.name}</Text>
+                <Text fontSize={'xs'}>{plan?.description}</Text>
+                <PlanTable pageTask={plan} taskTree={pageProfile?.shared_tasks} isEditable={false}/>
+                </Box>
+              ))
+            }
+        </Stack>
       </Box>
     </PageLoading>
   );

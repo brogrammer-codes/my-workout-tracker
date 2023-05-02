@@ -1,4 +1,4 @@
-import { deleteTask as deleteTaskApi, patchTask, postTask, fetchTaskTree, cloneTask } from '@/utils/api';
+import { deleteTask as deleteTaskApi, patchTask, postTask, fetchTaskTree, cloneTask, createSharedTask } from '@/utils/api';
 import { useState, useEffect } from 'react';
 import { useToast } from '@chakra-ui/react';
 
@@ -92,7 +92,18 @@ export const useTask = () => {
     }).catch((e) => setError(e))
   };
   
+  const copyTaskToShared = async (task_id) => {
+    await createSharedTask(task_id,).then(({task}) => {
+      toast({
+        title: `${task?.type} shared`,
+        description: `Successfully shared ${task?.name}, go to your profile page to see it!`,
+        status: 'success',
+        duration: 4000,
+        isClosable: true,
+      })
+    }).catch((e) => setError(e))
+  }
   
-  return { error, loading, getTaskTree, taskTree, addTask, updateTask, deleteTask, copyTask }
+  return { error, loading, getTaskTree, taskTree, addTask, updateTask, deleteTask, copyTask, copyTaskToShared }
 
 }

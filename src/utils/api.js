@@ -134,3 +134,14 @@ export const cloneTask = async (task_id, parent_id) => {
         .then(({ data }) => data[0])
         .catch((error) => console.log(error));
   };
+
+export const createSharedTask = async (task_id) => {
+    const options = {
+        method: 'POST',
+        url: `${API}/shared-task/create`,
+        data: {task_id},
+    };
+    return axios(options)
+        .then(({ data }) => data[0])
+        .catch((error) => console.log(error));
+  };

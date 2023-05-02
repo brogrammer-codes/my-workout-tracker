@@ -10,7 +10,7 @@ import { CheckCircleIcon } from "@chakra-ui/icons";
 import PageLoading from '@/component/PageLoading';
 
 const PlanPage = () => {
-  const { user, getTaskTree, taskTree, updateTask, addTask, deleteTask, taskLoading } = useTaskListContext()
+  const { user, getTaskTree, taskTree, updateTask, addTask, deleteTask, taskLoading, copyTaskToShared } = useTaskListContext()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [pageTask, setPageTask] = useState(null)
   const [modalActivity, setModalActivity] = useState(null)
@@ -71,9 +71,10 @@ const PlanPage = () => {
 
         <Button onClick={editOnClick} colorScheme='brand' isLoading={taskLoading} isDisabled={pageTask?.complete || taskLoading}> {editTask ? 'Save' : 'Edit'} {pageTask?.type}</Button>
         <Button onClick={onOpen} colorScheme='brand' isLoading={taskLoading} isDisabled={pageTask?.complete || taskLoading}>Add Activity</Button>
+        <Button onClick={() => copyTaskToShared(pageTask?.id)} colorScheme='green' isLoading={taskLoading} isDisabled={!pageTask?.complete || taskLoading}>Share Plan</Button>
         <Button onClick={() => router.push(`/plan/workout/${id}`)} colorScheme='brand' isLoading={taskLoading} isDisabled={taskLoading}>Workout with Plan</Button>
       </Stack>
-      <PlanTable taskTree={taskTree} parentId={id} pageTask={pageTask} deleteTask={deleteTask} updatePagePlan={updatePagePlan} editTask={editTask} editActivity={editActivity} />
+      <PlanTable isEditable={!pageTask?.complete} taskTree={taskTree} parentId={id} pageTask={pageTask} deleteTask={deleteTask} updatePagePlan={updatePagePlan} editTask={editTask} editActivity={editActivity} />
       <TaskModal isOpen={isOpen} onSubmit={createTask} onClose={closeTaskModal} parentTask={pageTask} currentTask={modalActivity} />
 
     </PageLoading>
