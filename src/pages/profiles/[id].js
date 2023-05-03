@@ -47,7 +47,7 @@ const ProfilePage = () => {
     }
   }, [pageProfile])
 
-  const updateProfile = (key, value) => setPageProfile({ ...profile, [key]: value })
+  const updateProfile = (key, value) => setPageProfile({ ...pageProfile, [key]: value })
   const handleSubmit = async (event) => {
     event.preventDefault();
     updateUserProfile(pageProfile);
