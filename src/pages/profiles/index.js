@@ -3,6 +3,8 @@ import { useTaskListContext } from '@/context/context';
 import { Box, Card, CardBody, CardFooter, Divider, Heading, Stack,  Text } from '@chakra-ui/react';
 import { Icon } from '@chakra-ui/icons'
 import {FaDumbbell, FaGlobeEurope} from 'react-icons/fa'
+import { TaskTree } from '@/component/TaskTree';
+import Link from 'next/link';
 const Profiles = () => {
   const { getProfiles, profiles, userLoading } = useTaskListContext()
   useEffect(() => {
@@ -18,7 +20,7 @@ const Profiles = () => {
           <Stack padding={2}>
             {
               profiles.map((profile) => (
-                <Card bg={'brandCard.400'} size={'md'} color={'brand.50'} _hover={{ bg: 'brand.500' }} key={profile?.id}>
+                <Card bg={'brandCard.400'} size={'md'} color={'brand.50'} _hover={{ bg: 'brand.500' }} key={profile?.id} as={Link} href={`/profiles/${profile?.id}`}>
                   <CardBody>
 
                     <Heading>{profile?.username}</Heading>
@@ -31,7 +33,6 @@ const Profiles = () => {
                       {profile?.favorite_activity &&
                         <Text><Icon as={FaDumbbell} /> {profile?.favorite_activity}</Text>
                       }
-
                       </Stack>
                     </CardFooter>
                   </CardBody>

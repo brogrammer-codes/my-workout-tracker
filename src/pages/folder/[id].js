@@ -5,7 +5,7 @@ import { TaskModal } from '@/component/TaskModal/TaskModal';
 import { TaskTree } from '@/component/TaskTree'
 import { useRouter } from 'next/router';
 import { TASK_TYPES, getPossibleSubtask } from '@/utils/constants';
-import { TaskTable } from '@/component/TaskTable';
+import PageLoading from '@/component/PageLoading';
 import { FolderTable } from '@/component/TaskTable/FolderTable';
 import { capitalizeString } from '@/utils/formats';
 
@@ -28,7 +28,7 @@ const FolderPage = () => {
   }, [taskTree])
 
   const createTask = () => {
-    addTask({name: '', type: fodlerSubtask, parent_id: id})
+    addTask({ name: '', type: fodlerSubtask, parent_id: id })
   }
 
   const closeTaskModal = () => {
@@ -42,21 +42,24 @@ const FolderPage = () => {
 
   const copyPlan = (task_id) => {
     copyTask(task_id)
-    
+
   }
-  if (!user || !pageTask) return <Center h='100px'><Spinner /></Center >
+  // if (!user || !pageTask) return <Center h='100px'><Spinner /></Center >
   return (
-    <Box  color={'brand.50'}>
-      <VStack alignItems={'flex-start'}>
-        <Heading>{capitalizeString(pageTask?.name)}</Heading>
-        <Text>{pageTask?.description}</Text>
-        <Button mb={4} onClick={fodlerSubtask === TASK_TYPES.ACTIVITY ? onOpen : createTask} colorScheme='brand'>Create {fodlerSubtask}</Button>
-      </VStack>
-      {
-        taskTree && (<FolderTable taskTree={taskTree} parentId={id} pageTask={pageTask} deleteTask={deleteTask} editActivity={editActivity} copyPlan={copyPlan}/>)
-      }
-      <TaskModal isOpen={isOpen} onSubmit={createTask} onClose={closeTaskModal} parentTask={!editTask && (newSubTask || pageTask)} currentTask={newSubTask}/>
-    </Box>
+    <PageLoading isLoading={(!user || !pageTask)}>
+
+      <Box color={'brand.50'}>
+        <VStack alignItems={'flex-start'}>
+          <Heading>{capitalizeString(pageTask?.name)}</Heading>
+          <Text>{pageTask?.description}</Text>
+          <Button mb={4} onClick={fodlerSubtask === TASK_TYPES.ACTIVITY ? onOpen : createTask} colorScheme='brand'>Create {fodlerSubtask}</Button>
+        </VStack>
+        {
+          taskTree && (<FolderTable taskTree={taskTree} parentId={id} pageTask={pageTask} deleteTask={deleteTask} editActivity={editActivity} copyPlan={copyPlan} />)
+        }
+        <TaskModal isOpen={isOpen} onSubmit={createTask} onClose={closeTaskModal} parentTask={!editTask && (newSubTask || pageTask)} currentTask={newSubTask} />
+      </Box>
+    </PageLoading>
   )
 }
 

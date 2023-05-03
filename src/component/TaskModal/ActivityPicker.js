@@ -7,17 +7,18 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-  Stack
+  Stack,
+  Divider
 } from '@chakra-ui/react';
 
-export const ActivityPicker = ({ setActivity, activity }) => {
+export const ActivityPicker = ({ setActivity, activity, isDisabled }) => {
   const [currentActivities, setCurrentActivities] = useState([])
-  const [keyword, setKeyword] = useState(null)
   const { onOpen, onClose: closePopover, isOpen } = useDisclosure()
   const firstFieldRef = React.useRef(null)
 
   useEffect(() => {
-    searchActivity({ keyword: activity?.name }).then(({ task }) => setCurrentActivities([...task]))
+    searchActivity({ keyword: activity?.name }).then(({ task = [] }) => setCurrentActivities([...task]))
+
   }, [activity?.name])
   const onDropDownClicked = (element) => {
     setActivity({ ...element, id: null, parent_id: activity.parent_id, })
@@ -40,11 +41,20 @@ export const ActivityPicker = ({ setActivity, activity }) => {
           value={activity?.name}
           onChange={(event) => setActivity((prevAct) => ({ ...prevAct, name: event.target.value }))}
           ref={firstFieldRef}
+          isDisabled={isDisabled}
+          placeholder='Pick an activity'
         />
       </PopoverTrigger>
       {currentActivities.length > 0 &&
         <PopoverContent >
-          <Stack> {currentActivities.map((element) => <Box _hover={{bg: 'brand.50'}} key={`${element?.id}-act`}color={'brand.500'} cursor={'pointer'} onClick={() => onDropDownClicked(element)}>{element.name}</Box>)}</Stack>
+          <Stack>
+            {currentActivities.map((element) =>
+              <Box _hover={{ bg: 'brand.50' }} key={`${element?.id}-act`} color={'brand.500'} cursor={'pointer'} onClick={() => onDropDownClicked(element)}>
+                {element.name}
+                <Divider />
+              </Box>
+            )}
+          </Stack>
         </PopoverContent>
       }
     </Popover>

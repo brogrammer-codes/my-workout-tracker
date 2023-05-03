@@ -7,7 +7,7 @@ export const Task_List = createContext(null);
 export const Context = ({ children }) => {
   const { setToken, token } = useApi()
   const { getUser, user, updateUserProfile, loginUser, logoutUser, error, loading: userLoading, getProfiles, profiles } = useUser()
-  const { getTaskTree, taskTree, addTask, updateTask, deleteTask, copyTask, loading: taskLoading } = useTask()
+  const { getTaskTree, taskTree, addTask, updateTask, deleteTask, copyTask, loading: taskLoading, copyTaskToShared } = useTask()
   // const { getPlanTree, planTree, updatePlan } = usePlan()
   useEffect(() => {
     if (token) {
@@ -24,6 +24,7 @@ export const Context = ({ children }) => {
     updateTask,
     deleteTask,
     copyTask,
+    copyTaskToShared,
     taskTree,
     setToken,
     getUser,
