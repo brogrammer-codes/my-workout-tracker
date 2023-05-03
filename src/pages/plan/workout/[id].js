@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useTaskListContext } from '@/context/context';
 import { Card, Box, Heading, Text, Stack, Container, Input, Link, Flex, SimpleGrid, Checkbox, CardHeader, CardBody, IconButton, Modal, useDisclosure, ModalOverlay, ModalContent, ModalHeader, ModalFooter, Button, ModalBody, ModalCloseButton } from '@chakra-ui/react';
-import { AddInput } from '@/component/AddInput';
 import { TASK_TAGS } from '@/utils/constants';
 import { Icon, LinkIcon } from "@chakra-ui/icons";
 import { HiVideoCamera, HiArrowLeft } from 'react-icons/hi'
