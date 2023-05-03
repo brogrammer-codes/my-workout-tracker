@@ -34,11 +34,11 @@ const TableElement = ({ node, elements, depth, deleteTask, editActivity, isEdita
             </Popover>
           )
           }
-              {node?.video_url && (<IconButton colorScheme='brand' aria-label='video-task-icon' size="sm" icon={<Icon as={HiVideoCamera} boxSize={5} />} as={Link} href={node.video_url} isExternal />)}
+          {node?.video_url && (<IconButton colorScheme='brand' aria-label='video-task-icon' size="sm" icon={<Icon as={HiVideoCamera} boxSize={5} />} as={Link} href={node.video_url} isExternal />)}
           {isEditable && (
             <>
-              <IconButton colorScheme='brand' aria-label='edit-task-icon' size="sm" icon={<SettingsIcon boxSize={4}/>} onClick={() => editActivity(node?.id)} />
-              <IconButton colorScheme='red' aria-label='delete-task-icon' size="sm" icon={<DeleteIcon boxSize={4}/>} onClick={() => deleteTask(node?.id)} />
+              <IconButton colorScheme='brand' aria-label='edit-task-icon' size="sm" icon={<SettingsIcon boxSize={4} />} onClick={() => editActivity(node?.id)} />
+              <IconButton colorScheme='red' aria-label='delete-task-icon' size="sm" icon={<DeleteIcon boxSize={4} />} onClick={() => deleteTask(node?.id)} />
             </>
           )}
         </HStack>

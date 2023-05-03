@@ -1,9 +1,10 @@
 import React from 'react'
 import { Button, Box, Td, Link, IconButton, HStack, Th, Tr, Thead, TableContainer, Table, Text, Tbody } from '@chakra-ui/react';
-import { ExternalLinkIcon, DeleteIcon } from "@chakra-ui/icons";
+import { Icon, DeleteIcon } from "@chakra-ui/icons";
 import { getChildTreeLength } from '@/utils/constants';
 import moment from 'moment';
 import { dateFormatMonthDayTime } from '@/utils/formats';
+import {FaExternalLinkAlt} from 'react-icons/fa'
 
 
 
@@ -16,6 +17,7 @@ const TableElement = ({ node, elements, addTask = () => { }, deleteTask = () => 
       <Td>{getChildTreeLength(node, elements)}</Td>
       <Td>
         <HStack >
+          <IconButton colorScheme='brand' aria-label='open-task-icon' size="xs" icon={<Icon as={FaExternalLinkAlt} />} as={Link} href={`/${node?.type}/${node?.id}`} />
           <IconButton colorScheme='brand' aria-label='open-task-icon' size="xs" icon={<DeleteIcon />} onClick={() => deleteTask(node?.id)} />
         </HStack>
       </Td>
