@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Box, Text, Flex, Spacer, Icon, Fade } from '@chakra-ui/react';
-import { PlanTable } from '@/component/TaskTable';
+import { ActivityTable } from '@/component/TaskTable';
 import moment from 'moment';
 import { dateFormatMonthDayTime } from '@/utils/formats';
 import {AiFillCaretDown, AiFillCaretUp} from 'react-icons/ai'
@@ -18,7 +18,7 @@ export const ProfilePlan = ({ plan, taskTree }) => {
         <Fade in={showTable}>
           <Text fontSize={'xs'}>{plan?.description}</Text>
 
-          <PlanTable pageTask={plan} taskTree={taskTree} isEditable={false} />
+          <ActivityTable pageTask={plan} taskTree={taskTree} isEditable={false} />
         </Fade>
 
       )}

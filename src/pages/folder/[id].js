@@ -2,11 +2,10 @@ import { useEffect, useState } from 'react';
 import { useTaskListContext } from '@/context/context';
 import { Button, Center, Flex, useDisclosure, Text, Box, List, Heading, Spinner, VStack } from '@chakra-ui/react';
 import { TaskModal } from '@/component/TaskModal/TaskModal';
-import { TaskTree } from '@/component/TaskTree'
 import { useRouter } from 'next/router';
 import { TASK_TYPES, getPossibleSubtask } from '@/utils/constants';
 import PageLoading from '@/component/PageLoading';
-import { FolderTable } from '@/component/TaskTable/FolderTable';
+import { FolderTable } from '@/component/TaskTable';
 import { capitalizeString } from '@/utils/formats';
 
 const FolderPage = () => {

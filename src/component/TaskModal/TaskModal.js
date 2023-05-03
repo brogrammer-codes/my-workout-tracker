@@ -2,7 +2,6 @@ import { useTaskListContext } from '@/context/context'
 import { TASK_TYPES } from '@/utils/constants'
 import { Modal, ModalContent, ModalOverlay, Input, Button, ModalBody, ModalHeader, Text, Box, Textarea, ModalCloseButton } from '@chakra-ui/react'
 import { useState, useEffect } from 'react'
-import ModalForm from './ModalForm'
 import ActivityModalForm from './ActivityModalForm'
 
 const newTask = {

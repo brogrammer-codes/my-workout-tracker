@@ -2,10 +2,10 @@ import React from 'react'
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useTaskListContext } from '@/context/context';
-import { Card, Box, Heading, Text, Stack, Container, Input, Link, Flex, SimpleGrid, Checkbox, CardHeader, CardBody, IconButton, Modal, useDisclosure, ModalOverlay, ModalContent, ModalHeader, ModalFooter, Button, ModalBody, ModalCloseButton } from '@chakra-ui/react';
+import { Card, Heading, Text, Stack, Container, Input, Link, Flex, SimpleGrid, Checkbox, CardHeader, CardBody, IconButton, Modal, useDisclosure, ModalOverlay, ModalContent, ModalHeader, ModalFooter, Button, ModalBody, ModalCloseButton } from '@chakra-ui/react';
 import { TASK_TAGS } from '@/utils/constants';
-import { Icon, LinkIcon } from "@chakra-ui/icons";
-import { HiVideoCamera, HiArrowLeft } from 'react-icons/hi'
+import { Icon } from "@chakra-ui/icons";
+import { HiVideoCamera } from 'react-icons/hi'
 import { IoMdReturnLeft } from 'react-icons/io'
 
 const WorkoutCard = ({ parentTask, task, taskTree, completeActivity }) => {

@@ -1,15 +1,13 @@
 import React from 'react'
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { Box, Heading, Input, Button, Text, Stack, Flex, Spinner, Grid, GridItem, SimpleGrid, Spacer } from '@chakra-ui/react';
-import { TaskTree } from '@/component/TaskTree';
+import { Box, Heading, Input, Button, Text, Stack,} from '@chakra-ui/react';
+
 import { useTaskListContext } from '@/context/context';
-import { ActivityPicker } from '@/component/TaskModal/ActivityPicker';
+import { ActivityPicker } from '@/component/ActivityPicker';
 import PageLoading from '@/component/PageLoading';
 import { TASK_TYPES } from '@/utils/constants';
-import { PlanTable } from '@/component/TaskTable';
-import moment from 'moment';
-import { dateFormatMonthDayTime } from '@/utils/formats';
+
 import { ProfilePlan } from '@/component/ProfilePlan';
 
 const ProfilePage = () => {
@@ -87,17 +85,6 @@ const ProfilePage = () => {
             ))
           }
         </Stack>
-        {/* 
-              <Box key={plan?.id} maxW={1000}>
-                <Flex>
-                  <Text as='b' fontSize={'2xl'}>{plan?.name}</Text>
-                  <Spacer />
-                  <Text>Shared on: {moment(plan?.inserted_at).format(dateFormatMonthDayTime)}</Text>
-                </Flex>
-                <Text fontSize={'xs'}>{plan?.description}</Text>
-                <PlanTable pageTask={plan} taskTree={pageProfile?.shared_tasks} isEditable={false} />
-              </Box>
-      */}
       </Box>
     </PageLoading>
   );

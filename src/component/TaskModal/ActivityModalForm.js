@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { useTaskListContext } from '@/context/context'
 import { TASK_TYPES } from '@/utils/constants';
-import { ActivityPicker } from './ActivityPicker';
+import { ActivityPicker } from '../ActivityPicker';
 const newActivity = {
   name: '',
   description: '',

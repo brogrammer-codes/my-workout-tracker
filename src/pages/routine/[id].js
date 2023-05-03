@@ -4,7 +4,7 @@ import { Button, Input, Stack, useDisclosure, Text, Heading, Textarea, HStack, G
 
 import { useRouter } from 'next/router';
 import { TASK_TYPES } from '@/utils/constants';
-import { RoutineTable } from '@/component/TaskTable';
+import { PlanTable } from '@/component/TaskTable';
 import { searchTypeWithKeyword } from '@/utils/api';
 import moment from 'moment';
 import { dateFormatMonthDayTime } from '@/utils/formats';
@@ -90,7 +90,7 @@ const RoutinePage = () => {
           </SimpleGrid>
         ) : null
       }
-      <RoutineTable taskTree={taskTree} parentId={id} pageTask={pageRoutine} deleteTask={deleteTask} />
+      <PlanTable taskTree={taskTree} parentId={id} pageTask={pageRoutine} deleteTask={deleteTask} />
 
     </PageLoading>
   )
