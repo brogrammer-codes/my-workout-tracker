@@ -2,7 +2,7 @@ import { useTaskListContext } from '@/context/context'
 import { TASK_TYPES } from '@/utils/constants'
 import { Modal, ModalContent, ModalOverlay, Input, Button, ModalBody, ModalHeader, Text, Box, Textarea, ModalCloseButton } from '@chakra-ui/react'
 import { useState, useEffect } from 'react'
-import ModalForm from './ModalForm'
+import ActivityModalForm from './ActivityModalForm'
 
 const newTask = {
   name: '',
@@ -43,7 +43,7 @@ export const TaskModal = ({ isOpen, onClose, currentTask, parentTask }) => {
       <ModalContent overflow={'scroll'}  bgColor={'brand.500'} padding={'10'}>
         <ModalCloseButton />
         <ModalBody >
-          <ModalForm currentTask={currentTask} parentTask={parentTask} onClose={onClose}/>
+        <ActivityModalForm currentActivity={currentTask} parentTask={parentTask} onClose={onClose} />
         </ModalBody>
       </ModalContent>
     </Modal>

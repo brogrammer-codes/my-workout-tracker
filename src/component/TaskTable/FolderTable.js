@@ -1,15 +1,15 @@
 import React from 'react'
 import { Button, Box, Td, Link, IconButton, HStack, Th, Tr, Thead, TableContainer, Table, TableCaption, Tbody } from '@chakra-ui/react';
-import { SettingsIcon, CopyIcon, ChevronRightIcon, ChevronDownIcon, ExternalLinkIcon, DeleteIcon } from "@chakra-ui/icons";
+import { SettingsIcon, CopyIcon, Icon, ChevronDownIcon, ExternalLinkIcon, DeleteIcon } from "@chakra-ui/icons";
 
 import { TASK_TYPES, getChildTreeLength, getPossibleSubtask } from '@/utils/constants';
 import moment from 'moment';
 import { dateFormatMonthDayTime } from '@/utils/formats';
-
+import {FaExternalLinkAlt} from 'react-icons/fa'
 const TableElement = ({ node, elements, editActivity=() => {},deleteTask= () => {}, copyPlan= () => {} }) => {
 
   return (
-    <Tr>
+    <Tr bg={node?.complete && 'brandCard.50'}>
         <Td>{node.name}</Td>
         <Td>{moment(node?.inserted_at).format(dateFormatMonthDayTime)}</Td>
             { node?.type !== TASK_TYPES.ACTIVITY && <Td>{getChildTreeLength(node, elements)}</Td>}
@@ -19,10 +19,9 @@ const TableElement = ({ node, elements, editActivity=() => {},deleteTask= () => 
                   {
                     node?.type === TASK_TYPES.ACTIVITY ? 
                     (<IconButton colorScheme='brand' aria-label='add-task-icon' size="xs" onClick={() => editActivity(node?.id)} icon={<SettingsIcon />} />) : 
-                    (<IconButton colorScheme='brand' aria-label='open-task-icon' size="xs" icon={<ExternalLinkIcon />} as={Link} href={`/${node?.type}/${node?.id}`} />)
+                    (<IconButton colorScheme='brand' aria-label='open-task-icon' size="xs" icon={<Icon as={FaExternalLinkAlt} />} as={Link} href={`/${node?.type}/${node?.id}`} />)
                   }
                 <IconButton colorScheme='brand' aria-label='delete-task-icon' size="xs" onClick={() => deleteTask(node?.id)} icon={<DeleteIcon />} />
-                {/* <IconButton colorScheme='brand' aria-label='open-task-icon' size="xs" icon={<ExternalLinkIcon />} as={Link} href={`/task/${node?.id}`} />  */}
                 </HStack>
             </Td>
 

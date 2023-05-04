@@ -5,7 +5,7 @@ import { Button, Input, Center, Flex, useDisclosure, Box, Spinner, Textarea, Sta
 import { TaskModal } from '@/component/TaskModal/TaskModal';
 import { useRouter } from 'next/router';
 import { TASK_TYPES } from '@/utils/constants';
-import { PlanTable } from '@/component/TaskTable';
+import { ActivityTable } from '@/component/TaskTable';
 import { CheckCircleIcon } from "@chakra-ui/icons";
 import PageLoading from '@/component/PageLoading';
 
@@ -74,7 +74,7 @@ const PlanPage = () => {
         <Button onClick={() => copyTaskToShared(pageTask?.id)} colorScheme='green' isLoading={taskLoading} isDisabled={!pageTask?.complete || taskLoading}>Share Plan</Button>
         <Button onClick={() => router.push(`/plan/workout/${id}`)} colorScheme='brand' isLoading={taskLoading} isDisabled={taskLoading}>Workout with Plan</Button>
       </Stack>
-      <PlanTable isEditable={!pageTask?.complete} taskTree={taskTree} parentId={id} pageTask={pageTask} deleteTask={deleteTask} updatePagePlan={updatePagePlan} editTask={editTask} editActivity={editActivity} />
+      <ActivityTable isEditable={!pageTask?.complete} taskTree={taskTree} parentId={id} pageTask={pageTask} deleteTask={deleteTask} updatePagePlan={updatePagePlan} editTask={editTask} editActivity={editActivity} />
       <TaskModal isOpen={isOpen} onSubmit={createTask} onClose={closeTaskModal} parentTask={pageTask} currentTask={modalActivity} />
 
     </PageLoading>

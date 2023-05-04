@@ -1,5 +1,4 @@
 import { useUser, useTask, useApi } from "@/hooks/api";
-import { usePlan } from "@/hooks/api/usePlan";
 import { createContext, useState, useEffect, useContext } from "react";
 
 export const Task_List = createContext(null);
@@ -8,7 +7,6 @@ export const Context = ({ children }) => {
   const { setToken, token } = useApi()
   const { getUser, user, updateUserProfile, loginUser, logoutUser, error, loading: userLoading, getProfiles, profiles } = useUser()
   const { getTaskTree, taskTree, addTask, updateTask, deleteTask, copyTask, loading: taskLoading, copyTaskToShared } = useTask()
-  // const { getPlanTree, planTree, updatePlan } = usePlan()
   useEffect(() => {
     if (token) {
       getUser()
