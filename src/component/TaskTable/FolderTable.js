@@ -1,27 +1,30 @@
 import React from 'react'
-import { Button, Box, Td, Link, IconButton, HStack, Th, Tr, Thead, TableContainer, Table, TableCaption, Tbody } from '@chakra-ui/react';
+import { Button, Text, Td, Link, IconButton, HStack, Th, Tr, Thead, TableContainer, Table, TableCaption, Tbody } from '@chakra-ui/react';
 import { SettingsIcon, CopyIcon, Icon, ChevronDownIcon, ExternalLinkIcon, DeleteIcon } from "@chakra-ui/icons";
 
 import { TASK_TYPES, getChildTreeLength, getPossibleSubtask } from '@/utils/constants';
 import moment from 'moment';
 import { dateFormatMonthDayTime } from '@/utils/formats';
 import {FaExternalLinkAlt} from 'react-icons/fa'
+import { DeleteTaskIcon } from '../DeleteTaskIcon';
+
 const TableElement = ({ node, elements, editActivity=() => {},deleteTask= () => {}, copyPlan= () => {} }) => {
 
   return (
     <Tr bg={node?.complete && 'brandCard.50'}>
-        <Td>{node.name}</Td>
+        <Td><Text as={Link} href={`/${node?.type}/${node?.id}`} >{node.name}</Text></Td>
         <Td>{moment(node?.inserted_at).format(dateFormatMonthDayTime)}</Td>
             { node?.type !== TASK_TYPES.ACTIVITY && <Td>{getChildTreeLength(node, elements)}</Td>}
             <Td>
                 <HStack >
-                  <IconButton colorScheme='brand' aria-label='delete-task-icon' size="xs" onClick={() => copyPlan(node?.id)} icon={<CopyIcon />} />
+                  <IconButton colorScheme='brand' aria-label='delete-task-icon' size="sm" onClick={() => copyPlan(node?.id)} icon={<CopyIcon boxSize={4}/>} />
                   {
                     node?.type === TASK_TYPES.ACTIVITY ? 
-                    (<IconButton colorScheme='brand' aria-label='add-task-icon' size="xs" onClick={() => editActivity(node?.id)} icon={<SettingsIcon />} />) : 
-                    (<IconButton colorScheme='brand' aria-label='open-task-icon' size="xs" icon={<Icon as={FaExternalLinkAlt} />} as={Link} href={`/${node?.type}/${node?.id}`} />)
+                    (<IconButton colorScheme='brand' aria-label='add-task-icon' size="sm" onClick={() => editActivity(node?.id)} icon={<SettingsIcon boxSize={4} />} />) : 
+                    (<IconButton colorScheme='brand' aria-label='open-task-icon' size="sm" icon={<Icon as={FaExternalLinkAlt} boxSize={4} />} as={Link} href={`/${node?.type}/${node?.id}`} />)
                   }
-                <IconButton colorScheme='brand' aria-label='delete-task-icon' size="xs" onClick={() => deleteTask(node?.id)} icon={<DeleteIcon />} />
+                 <DeleteTaskIcon onDelete={() => deleteTask(node?.id)} taskName={node?.name}/>
+                
                 </HStack>
             </Td>
 

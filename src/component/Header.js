@@ -6,6 +6,7 @@ import { useTaskListContext } from '@/context/context';
 const Header = () => {
   const { isOpen, onToggle } = useDisclosure();
   const { user } = useTaskListContext()
+  const [username, setUsername] = useState(null)
   const [menuItems, setMenuItems] = useState([
     { name: "Home", href: "/" },
   ]);
@@ -17,6 +18,7 @@ const Header = () => {
         { name: "Folders", href: "/task" },
         { name: "User", href: `/profiles/${user?.user?.id}` },
       ])
+      setUsername(user?.profile?.username)
     } else {
       setMenuItems([
         { name: "Home", href: "/" },
@@ -29,7 +31,7 @@ const Header = () => {
   return (
     <Flex alignItems="center" bg="gray.800"  color={'brand.50'} px={4} py={2}>
       <Heading as="h1" size="md">
-        My Workout Tracker
+        {username ? `Welcome, ${username}` : 'My Workout Tracker'}
       </Heading>
       <Spacer />
       <Box display={{ base: "none", md: "block" }}>

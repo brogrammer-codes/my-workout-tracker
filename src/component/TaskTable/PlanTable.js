@@ -1,10 +1,11 @@
 import React from 'react'
 import { Button, Box, Td, Link, IconButton, HStack, Th, Tr, Thead, TableContainer, Table, Text, Tbody } from '@chakra-ui/react';
-import { Icon, DeleteIcon } from "@chakra-ui/icons";
+import { Icon } from "@chakra-ui/icons";
 import { getChildTreeLength } from '@/utils/constants';
 import moment from 'moment';
 import { dateFormatMonthDayTime } from '@/utils/formats';
 import {FaExternalLinkAlt} from 'react-icons/fa'
+import { DeleteTaskIcon } from '../DeleteTaskIcon';
 
 
 
@@ -16,9 +17,9 @@ const TableElement = ({ node, elements, addTask = () => { }, deleteTask = () => 
       <Td>{moment(node?.inserted_at).format(dateFormatMonthDayTime)}</Td>
       <Td>{getChildTreeLength(node, elements)}</Td>
       <Td>
-        <HStack >
-          <IconButton colorScheme='brand' aria-label='open-task-icon' size="xs" icon={<Icon as={FaExternalLinkAlt} />} as={Link} href={`/${node?.type}/${node?.id}`} />
-          <IconButton colorScheme='brand' aria-label='open-task-icon' size="xs" icon={<DeleteIcon />} onClick={() => deleteTask(node?.id)} />
+        <HStack spacing={2}>
+          <IconButton colorScheme='brand' aria-label='open-task-icon' size='sm' icon={<Icon as={FaExternalLinkAlt} boxSize={4}/>} as={Link} href={`/${node?.type}/${node?.id}`} />
+          <DeleteTaskIcon onDelete={() => deleteTask(node?.id)} taskName={node?.name}/>
         </HStack>
       </Td>
     </Tr>

@@ -1,10 +1,10 @@
 import React from 'react'
-import { Button, Box, Link, Text, HStack, Tr, Input, TableContainer, Table, IconButton, Tbody, Grid, GridItem, Container, Popover, PopoverTrigger, PopoverContent, } from '@chakra-ui/react';
-import { CheckCircleIcon, SettingsIcon, Icon, DeleteIcon } from "@chakra-ui/icons";
+import { Button, Box, Link, Text, HStack, Tr, Input,  IconButton, Tbody, Grid, GridItem, Container, Popover, PopoverTrigger, PopoverContent, } from '@chakra-ui/react';
+import { CheckCircleIcon, SettingsIcon, Icon } from "@chakra-ui/icons";
 import { HiVideoCamera } from 'react-icons/hi'
 import { MdDescription } from 'react-icons/md'
 
-import { getPossibleSubtask } from '@/utils/constants';
+import { DeleteTaskIcon } from '../DeleteTaskIcon';
 
 
 const TableElement = ({ node, elements, depth, deleteTask, editActivity, isEditable }) => {
@@ -38,7 +38,7 @@ const TableElement = ({ node, elements, depth, deleteTask, editActivity, isEdita
           {isEditable && (
             <>
               <IconButton colorScheme='brand' aria-label='edit-task-icon' size="sm" icon={<SettingsIcon boxSize={4} />} onClick={() => editActivity(node?.id)} />
-              <IconButton colorScheme='red' aria-label='delete-task-icon' size="sm" icon={<DeleteIcon boxSize={4} />} onClick={() => deleteTask(node?.id)} />
+              <DeleteTaskIcon onDelete={() => deleteTask(node?.id)} taskName={node?.name}/>
             </>
           )}
         </HStack>
