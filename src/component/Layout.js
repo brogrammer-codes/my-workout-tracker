@@ -4,20 +4,18 @@ import Head from 'next/head'
 
 const Layout = ({ children }) => {
   return (
-    <Box height={'100vh'}>
+    <Box position={'relative'} zIndex={0} bg={'brand.200'} minHeight={'100vh'}>
       <Head>
         <title>My Workout Tracker</title>
         <meta name="description" content="I created this to help me organize my thoughts and tasks" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Flex alignItems="start" justifyContent="center" background="brand.200" height="100%" overflow="scroll">
-        <Flex direction="column" padding="10" bg={'brand.200'} minW={'50%'}>
+      <Flex alignItems="start" justifyContent="center" background="brand.200" width={'full'}>
           <Header />
-          <Box height={'100%'} width={'100%'}>
+          <Box height={'100%'} width={'100%'} marginTop={'5em'} p={5}>
             {children}
           </Box>
-        </Flex>
       </Flex>
       <div className="landing-page__footer">
         <p>&copy; 2023 Brogrammer Codes</p>

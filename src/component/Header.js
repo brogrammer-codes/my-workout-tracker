@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Box, Button, Flex, Heading, Spacer, useDisclosure, Link } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Spacer, useDisclosure, Link, UnorderedList, IconButton, ListItem, Text } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { useTaskListContext } from '@/context/context';
 
@@ -29,42 +29,52 @@ const Header = () => {
   }, [user])
 
   return (
-    <Flex alignItems="center" bg="gray.800"  color={'brand.50'} px={4} py={2}>
+    <Flex alignItems="center" width={'full'} p={{base: 5, md: 7}} top={0} position='fixed' bg={'brand.900'} zIndex={20} color={'brand.50'} >
       <Heading as="h1" size="md">
         {username ? `Welcome, ${username}` : 'My Workout Tracker'}
       </Heading>
       <Spacer />
       <Box display={{ base: "none", md: "block" }}>
-        {menuItems.map((item, index) => (
-          <Button
-            key={index}
-            variant="ghost"
-            mr={4}
-            href={item.href}
-            as={Link}
-          >
-            {item.name}
-          </Button>
-        ))}
+      <Heading as="h1" size="md">{username && 'My Workout Tracker'}</Heading>
       </Box>
-      <Box display={{ base: "block", md: "none" }}>
-        <Button variant="ghost" color='brand.50' onClick={onToggle}>
-          <HamburgerIcon />
-        </Button>
-      </Box>
-      <Box display={{ base: isOpen ? "block" : "none", md: "none" }} mt={{ base: 4, md: 0 }}>
+      <Spacer />
+      <Box display={{ base: "none", md: "block" }}>
+      <UnorderedList display={{ base: "none", md: "flex" }} >
         {menuItems.map((item, index) => (
-          <Button
+          <ListItem
             key={index}
-            variant="ghost"
             display="block"
             href={item.href}
             as={Link}
+            cursor={'pointer'}
+            _hover={{bg: 'brand.500', fontSize: 'xl'}}
+            px={4}
+            py={1}
           >
-            {item.name}
-          </Button>
+            <Text fontSize={'lg'}>{item.name}</Text>
+          </ListItem>
         ))}
+      </UnorderedList>
       </Box>
+      <Box display={{ base: "block", md: "none" }} marginRight={2}>
+        <IconButton icon={<HamburgerIcon />} onClick={onToggle} variant='unstyled' color='brand.50' size={'lg'}/>
+      </Box>
+      <UnorderedList display={{ base: isOpen ? "block" : "none", md: "none" }} mt={{ base: 4, md: 0 }}>
+        {menuItems.map((item, index) => (
+          <ListItem
+            key={index}
+            display="block"
+            href={item.href}
+            as={Link}
+            cursor={'pointer'}
+            _hover={{bg: 'brand.500', fontSize: 'xl'}}
+            px={4}
+            py={1}
+          >
+            <Text fontSize={'lg'}>{item.name}</Text>
+          </ListItem>
+        ))}
+      </UnorderedList>
     </Flex>
   );
 };
