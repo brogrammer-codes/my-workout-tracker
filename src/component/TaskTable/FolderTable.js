@@ -12,7 +12,8 @@ const TableElement = ({ node, elements, editActivity=() => {},deleteTask= () => 
 
   return (
     <Tr bg={node?.complete && 'brandCard.50'}>
-        <Td><Text as={Link} href={`/${node?.type}/${node?.id}`} >{node.name}</Text></Td>
+      { node?.type === TASK_TYPES.ACTIVITY ? <Td>{node.name}</Td> : <Td><Text as={Link} href={`/${node?.type}/${node?.id}`} >{node.name}</Text></Td>}
+        
         <Td>{moment(node?.inserted_at).format(dateFormatMonthDayTime)}</Td>
             { node?.type !== TASK_TYPES.ACTIVITY && <Td>{getChildTreeLength(node, elements)}</Td>}
             <Td>
