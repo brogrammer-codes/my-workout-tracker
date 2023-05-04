@@ -15,13 +15,13 @@ const TableElement = ({ node, elements, editActivity=() => {},deleteTask= () => 
             { node?.type !== TASK_TYPES.ACTIVITY && <Td>{getChildTreeLength(node, elements)}</Td>}
             <Td>
                 <HStack >
-                  <IconButton colorScheme='brand' aria-label='delete-task-icon' size="xs" onClick={() => copyPlan(node?.id)} icon={<CopyIcon />} />
+                  <IconButton colorScheme='brand' aria-label='delete-task-icon' size="sm" onClick={() => copyPlan(node?.id)} icon={<CopyIcon boxSize={4}/>} />
                   {
                     node?.type === TASK_TYPES.ACTIVITY ? 
-                    (<IconButton colorScheme='brand' aria-label='add-task-icon' size="xs" onClick={() => editActivity(node?.id)} icon={<SettingsIcon />} />) : 
-                    (<IconButton colorScheme='brand' aria-label='open-task-icon' size="xs" icon={<Icon as={FaExternalLinkAlt} />} as={Link} href={`/${node?.type}/${node?.id}`} />)
+                    (<IconButton colorScheme='brand' aria-label='add-task-icon' size="sm" onClick={() => editActivity(node?.id)} icon={<SettingsIcon boxSize={4} />} />) : 
+                    (<IconButton colorScheme='brand' aria-label='open-task-icon' size="sm" icon={<Icon as={FaExternalLinkAlt} boxSize={4} />} as={Link} href={`/${node?.type}/${node?.id}`} />)
                   }
-                <IconButton colorScheme='brand' aria-label='delete-task-icon' size="xs" onClick={() => deleteTask(node?.id)} icon={<DeleteIcon />} />
+                <IconButton colorScheme='red' aria-label='delete-task-icon' size="sm" onClick={() => deleteTask(node?.id)} icon={<DeleteIcon boxSize={4} />} />
                 </HStack>
             </Td>
 

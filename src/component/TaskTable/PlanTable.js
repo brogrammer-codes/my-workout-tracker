@@ -16,9 +16,9 @@ const TableElement = ({ node, elements, addTask = () => { }, deleteTask = () => 
       <Td>{moment(node?.inserted_at).format(dateFormatMonthDayTime)}</Td>
       <Td>{getChildTreeLength(node, elements)}</Td>
       <Td>
-        <HStack >
-          <IconButton colorScheme='brand' aria-label='open-task-icon' size="xs" icon={<Icon as={FaExternalLinkAlt} />} as={Link} href={`/${node?.type}/${node?.id}`} />
-          <IconButton colorScheme='brand' aria-label='open-task-icon' size="xs" icon={<DeleteIcon />} onClick={() => deleteTask(node?.id)} />
+        <HStack spacing={2}>
+          <IconButton colorScheme='brand' aria-label='open-task-icon' size='sm' icon={<Icon as={FaExternalLinkAlt} boxSize={4}/>} as={Link} href={`/${node?.type}/${node?.id}`} />
+          <IconButton colorScheme='red' aria-label='open-task-icon' size="sm" icon={<DeleteIcon boxSize={4} />} onClick={() => deleteTask(node?.id)} />
         </HStack>
       </Td>
     </Tr>
