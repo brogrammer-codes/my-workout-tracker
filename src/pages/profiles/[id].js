@@ -48,7 +48,9 @@ const ProfilePage = () => {
   const updateProfile = (key, value) => setPageProfile({ ...pageProfile, [key]: value })
   const handleSubmit = async (event) => {
     event.preventDefault();
-    updateUserProfile(pageProfile);
+    const updatedProfile = {...pageProfile}
+    delete updatedProfile.shared_tasks
+    updateUserProfile(updatedProfile);
   }
   return (
     <PageLoading isLoading={!pageProfile}>
