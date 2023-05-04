@@ -23,7 +23,8 @@ export default function App({ Component, pageProps }) {
         100: "#5158BB",
         200: '#043565',
         500: '#223B67',
-        900: "#1E355B",
+        800: "#1E355B",
+        900: "#030508",
       },
       brandCard: {
         50: '#35823c',
