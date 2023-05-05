@@ -26,7 +26,7 @@ const Header = () => {
         ])
       }
     }
-  }, [userLoading])
+  }, [user, userLoading])
 
   return (
     <Flex alignItems="center" width={'full'} p={{ base: 5, md: 7 }} top={0} position='fixed' bg={'brand.900'} zIndex={20} color={'brand.50'} >
