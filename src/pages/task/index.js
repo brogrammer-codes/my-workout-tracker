@@ -3,6 +3,7 @@ import { useTaskListContext } from '@/context/context';
 import { TaskTree } from '@/component/TaskTree'
 import { useRouter } from 'next/router';
 import PageLoading from '@/component/PageLoading';
+import { Folders } from '@/component/Folders';
 
 
 
@@ -19,8 +20,8 @@ const TaskListPage = () => {
 
   return (
     <PageLoading isLoading={(!user)}>
-
-      {taskTree && <TaskTree elements={taskTree} />}
+        {taskTree && <Folders folderTree={taskTree}/>}
+      {/* {taskTree && <TaskTree elements={taskTree} />} */}
     </PageLoading>
   )
 }

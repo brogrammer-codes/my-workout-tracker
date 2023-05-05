@@ -1,4 +1,4 @@
-import { Flex, Box, Container } from '@chakra-ui/react'
+import { Flex, Box, Text } from '@chakra-ui/react'
 import Header from './Header'
 import Head from 'next/head'
 
@@ -17,9 +17,9 @@ const Layout = ({ children }) => {
             {children}
           </Box>
       </Flex>
-      <div className="landing-page__footer">
-        <p>&copy; 2023 Brogrammer Codes</p>
-      </div>
+      <Box position={'fixed'} bottom={0} height={5} bg={'brand.900'} color={'brand.50'} width={'100%'}>
+        <Text>&copy; 2023 Brogrammer Codes</Text>
+      </Box>
     </Box>
   )
 }

@@ -1,3 +1,5 @@
+import moment, { unitOfTime } from "moment";
+
 export const TASK_TYPES = {
     FOLDER: 'folder',
     TASK: 'task',
@@ -38,3 +40,31 @@ export const getChildTreeLength = (parentTask, elements) => {
     });
     return count
   }
+
+export const getSubTreeStats = (parentTask, elements) => {
+    let sub_tree = getSubTree(parentTask, elements)
+    
+    sub_tree = sub_tree.sort((a, b) => moment(b.inserted_at).valueOf() - moment(a.inserted_at).valueOf())
+    let stats = {
+        latest_updated_task: sub_tree[0],
+        total_tasks: sub_tree.length,
+        child_elements: elements.filter(el => el.parent_id === parentTask.id),
+        sub_tree,
+    }
+    if(parentTask?.name === TASK_TYPES.ROUTINE && sub_tree?.length){
+        stats.upcoming_plan = sub_tree.find((subtask) => subtask?.type === TASK_TYPES.PLAN)
+        stats.number_complete =  sub_tree.filter((task) => task?.complete === true).length
+    }
+    return stats
+}
+
+export const getSubTree = (parentTask, elements) => {
+    if(!elements?.length) return 0
+    let childElements = elements.filter(el => el.parent_id === parentTask.id);
+    // let count = childElements.length
+    // childElements = childElements.sort((a, b) => moment(b.inserted_at).valueOf() - moment(a.inserted_at).valueOf())
+    childElements.forEach(element => {
+        childElements = [...childElements,  ...getSubTree(element, elements)]
+    });
+    return [...childElements]
+}
