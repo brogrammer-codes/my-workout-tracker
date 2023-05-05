@@ -36,11 +36,11 @@ export const Folders = ({ folderTree }) => {
                   Last updated in {folder.name}: {stats?.latest_updated_task?.name} on {moment(stats?.latest_updated_task?.inserted_at).format(dateFormatMonthDayTime)} 
                 </Text>
                 {stats?.number_complete && (<Text>
-                  Total Complete Tasks: {stats?.number_complete}/{stats?.total_tasks}
+                  Total Complete Tasks: {stats?.number_complete}
                 </Text>)}
                 {
                   stats?.upcoming_plan && (
-                    <Text as={Link} href={`/plan/${stats?.upcoming_plan?.id}`} >Upcoming plan: {stats.upcoming_plan.name} <Icon as={HiExternalLink}/></Text>
+                    <Text as={Link} href={`/plan/workout/${stats?.upcoming_plan?.id}`} >Upcoming plan: {stats.upcoming_plan.name} <Icon as={HiExternalLink}/></Text>
                   )
                 }
               </Box>

@@ -34,7 +34,7 @@ const Header = () => {
         {username ? `Welcome, ${username}` : 'My Workout Tracker'}
       </Heading>
       <Spacer />
-      <Box display={{ base: "none", md: "block" }}>
+      <Box display={{ base: "none", lg: "block" }}>
         <Heading as="h1" size="md">{username && 'My Workout Tracker'}</Heading>
       </Box>
       <Spacer />
