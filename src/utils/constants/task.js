@@ -52,7 +52,7 @@ export const getSubTreeStats = (parentTask, elements) => {
         sub_tree,
     }
     if(parentTask?.name === TASK_TYPES.ROUTINE && sub_tree?.length){
-        stats.upcoming_plan = sub_tree.find((subtask) => subtask?.type === TASK_TYPES.PLAN)
+        stats.upcoming_plan = sub_tree.find((subtask) => subtask?.type === TASK_TYPES.PLAN && subtask?.complete !== true)
         stats.number_complete =  sub_tree.filter((task) => task?.complete === true).length
     }
     return stats
