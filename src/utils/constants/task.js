@@ -33,7 +33,7 @@ export const getPageType = (parentTask, currentTask) => {
 
 export const getChildTreeLength = (parentTask, elements) => {
     if(!elements?.length) return 0
-    const childElements = elements.filter(el => el.parent_id === parentTask.id);
+    const childElements = elements.filter(el => el?.parent_id === parentTask?.id);
     let count = childElements.length
     childElements.forEach(element => {
       count += getChildTreeLength(element)

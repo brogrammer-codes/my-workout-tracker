@@ -61,7 +61,7 @@ const WorkoutPage = () => {
   }, [user, router])
   useEffect(() => {
     setPageTask(taskTree.find((task) => task?.id === id))
-    setPageTaskTree(taskTree.filter((task) => task?.id !== id))
+    setPageTaskTree(taskTree.filter((task) => task?.parent_id === id))
   }, [taskTree])
   // console.log(pageTaskTree, pageTask);
   const completeActivity = (task) => {
