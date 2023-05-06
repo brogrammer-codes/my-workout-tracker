@@ -34,7 +34,7 @@ const TableElement = ({ node, elements, editActivity=() => {},deleteTask= () => 
 }
 export const FolderTable = ({ taskTree, parentId, copyPlan, deleteTask, editActivity }) => {
   if (taskTree.length) {
-    const rootElements = taskTree.filter(el => el.parent_id === parentId);
+    const rootElements = taskTree.filter(el => el?.parent_id === parentId);
     const elementSubtasks = getPossibleSubtask(rootElements[0])
     return (
       <TableContainer color={'brand.50'}>

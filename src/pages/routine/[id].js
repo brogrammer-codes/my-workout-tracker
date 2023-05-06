@@ -9,6 +9,7 @@ import { searchTypeWithKeyword } from '@/utils/api';
 import moment from 'moment';
 import { dateFormatMonthDayTime } from '@/utils/formats';
 import PageLoading from '@/component/PageLoading';
+import Link from 'next/link';
 
 const RoutinePage = () => {
   const { user, getTaskTree, taskTree, addTask, updateTask, deleteTask, copyTask } = useTaskListContext()
@@ -67,6 +68,7 @@ const RoutinePage = () => {
   }
   return (
     <PageLoading isLoading={(!user || !pageRoutine || pageRoutine?.type !== TASK_TYPES.ROUTINE)}>
+      <Text as={Link} href={`/folder/${pageRoutine?.parent_id}`}>Return to Folder</Text>
       <Heading>Routine</Heading>
       <Stack direction={{ lg: 'row', base: 'column' }} spacing={1}>
 

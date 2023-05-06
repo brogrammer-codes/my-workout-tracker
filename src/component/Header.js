@@ -13,8 +13,8 @@ const Header = () => {
       if (user?.user?.id) {
         setMenuItems([
           { name: "Home", href: "/" },
-          { name: "Profiles", href: "/profiles" },
           { name: "Folders", href: "/task" },
+          { name: "Profiles", href: "/profiles" },
           { name: "User", href: `/profiles/${user?.user?.id}` },
         ])
         setUsername(user?.profile?.username)
@@ -50,6 +50,7 @@ const Header = () => {
               _hover={{ bg: 'brand.500', fontSize: 'xl' }}
               px={4}
               py={1}
+              height={'full'}
             >
               <Text fontSize={'lg'}>{item.name}</Text>
             </ListItem>
