@@ -22,7 +22,7 @@ const WorkoutCard = ({ parentTask, task, taskTree, completeActivity }) => {
             <Text cursor={'pointer'} as={'b'} onClick={() => setShowDescription((prev) => !prev)} fontSize={'xl'}>{cardActivity?.name}</Text>
             {task?.video_url && (<Link isExternal href={task.video_url}><Icon as={HiVideoCamera} boxSize={7} />  </Link>)}
           </Flex>
-          <Checkbox isChecked={task?.complete} isDisabled={task?.complete} onChange={() => completeActivity(cardActivity)} />
+          {task?.can_complete && <Checkbox isChecked={task?.complete} isDisabled={task?.complete} onChange={() => completeActivity(cardActivity)} />}
         </Flex>
       </CardHeader>
       <CardBody>
@@ -114,7 +114,7 @@ const WorkoutPage = () => {
           <Heading>{pageTask?.name}</Heading>
           <Text>{pageTask?.description}</Text>
         </Flex>
-        <Checkbox isChecked={pageTask?.complete} isDisabled={pageTask?.complete || taskLoading} onChange={onOpen} />
+        {pageTask?.can_complete && <Checkbox isChecked={pageTask?.complete} isDisabled={pageTask?.complete || taskLoading} onChange={onOpen} />}
       </Flex>
       <ShareModal />
 
