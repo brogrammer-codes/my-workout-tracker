@@ -26,12 +26,11 @@ export const Folders = ({ folderTree }) => {
               <Box display={'flex'} flexDirection={'column'}>
                 <Text>
 
-                  {capitalizeString(subtask)} count: {stats.child_elements.length}
-                </Text>
-                <Text>
-
                   Last updated in {folder.name}: {stats?.latest_updated_task?.name} on {moment(stats?.latest_updated_task?.inserted_at).format(dateFormatMonthDayTime)}
                 </Text>
+                {
+                  stats?.child_elements.length ? <Text> {capitalizeString(subtask)} count: {stats.child_elements.length} in {folder.name}</Text> : <Text>You have no {folder.name}, open the folder to create some.</Text>
+                }
                 {stats?.number_complete && (<Text>
                   Total Complete Tasks: {stats?.number_complete}
                 </Text>)}
