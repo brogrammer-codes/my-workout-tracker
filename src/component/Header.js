@@ -6,8 +6,16 @@ import { useTaskListContext } from '@/context/context';
 const Header = () => {
   const { isOpen, onToggle } = useDisclosure();
   const { user, userLoading } = useTaskListContext()
-  const [username, setUsername] = useState(null)
+  // const [username, setUsername] = useState(null)
   const [menuItems, setMenuItems] = useState([]);
+  useEffect(() => {
+    window.addEventListener('click', (e) => {
+      if(!document.getElementById('navBar').contains(e.target) && isOpen) {
+        onToggle();
+      }
+    })
+  })
+  
   useEffect(() => {
     if (!userLoading) {
       if (user?.user?.id) {
@@ -17,7 +25,7 @@ const Header = () => {
           { name: "Profiles", href: "/profiles" },
           { name: "User", href: `/profiles/${user?.user?.id}` },
         ])
-        setUsername(user?.profile?.username)
+        // setUsername(user?.profile?.username)
       } else {
         setMenuItems([
           { name: "Home", href: "/" },
@@ -29,13 +37,13 @@ const Header = () => {
   }, [user, userLoading])
 
   return (
-    <Flex alignItems="center" width={'full'} p={{ base: 5, md: 7 }} top={0} position='fixed' bg={'brand.900'} zIndex={20} color={'brand.50'} >
+    <Flex alignItems="center" width={'full'} p={{ base: 5, md: 7 }} top={0} position='fixed' bg={'brand.900'} zIndex={20} color={'brand.50'} id='navBar'>
       <Heading as="h1" size="md">
-        {username ? `Welcome, ${username}` : 'My Workout Tracker'}
+        {user?.profile?.full_name ? `Welcome, ${user?.profile?.full_name}` : 'My Workout Tracker'}
       </Heading>
       <Spacer />
       <Box display={{ base: "none", lg: "block" }}>
-        <Heading as="h1" size="md">{username && 'My Workout Tracker'}</Heading>
+        <Heading as="h1" size="md">{user?.profile?.full_name && 'My Workout Tracker'}</Heading>
       </Box>
       <Spacer />
       <Box display={{ base: "none", md: "block" }}>
