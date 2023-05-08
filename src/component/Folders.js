@@ -15,32 +15,34 @@ export const Folders = ({ folderTree }) => {
           const stats = getSubTreeStats(folder, folderTree)
           const subtask = getPossibleSubtask(folder)
           return (
-            <Box w={'full'} height={'230px'} key={folder.id} bg={'brand.800'} _hover={{ bg: 'brand.500', textDecoration: 'none' }} p={5} borderRadius={'lg'} as={Link} href={`/${folder?.type}/${folder?.id}`} >
-              <Box
-                width={'100%'}
-                color={'brand.50'}
-              >
-                <Text fontSize={'2xl'} >{capitalizeString(folder.name)} <Icon as={HiFolderOpen} /></Text>
-              </Box>
-              <Text>{folder?.description}</Text>
-              <Box display={'flex'} flexDirection={'column'}>
-                <Text>
+            <>
+              {
+                stats?.upcoming_plan && (
+                  <Box bg={'brand.100'} p={5} borderRadius={'lg'} as={Link} href={`/plan/workout/${stats?.upcoming_plan?.id}`} ><Text fontSize={'xl'} >Upcoming plan: {stats.upcoming_plan.name} <Icon as={HiExternalLink} /></Text></Box>
+                )
+              }
+              <Box w={'full'} height={'100%'} key={folder.id} bg={'brand.800'} _hover={{ bg: 'brand.500', textDecoration: 'none' }} p={5} borderRadius={'lg'} as={Link} href={`/${folder?.type}/${folder?.id}`} >
+                <Box
+                  width={'100%'}
+                  color={'brand.50'}
+                >
+                  <Text fontSize={'2xl'} >{capitalizeString(folder.name)} <Icon as={HiFolderOpen} /></Text>
+                </Box>
+                <Text>{folder?.description}</Text>
+                <Box display={'flex'} flexDirection={'column'}>
+                  <Text>
 
-                  Last updated in {folder.name}: {stats?.latest_updated_task?.name} on {moment(stats?.latest_updated_task?.inserted_at).format(dateFormatMonthDayTime)}
-                </Text>
-                {
-                  stats?.child_elements.length ? <Text> {capitalizeString(subtask)} count: {stats.child_elements.length} in {folder.name}</Text> : <Text>You have no {folder.name}, open the folder to create some.</Text>
-                }
-                {stats?.number_complete && (<Text>
-                  Total Complete Tasks: {stats?.number_complete}
-                </Text>)}
-                {
-                  stats?.upcoming_plan && (
-                    <Text as={Link} href={`/plan/workout/${stats?.upcoming_plan?.id}`} >Upcoming plan: {stats.upcoming_plan.name} <Icon as={HiExternalLink} /></Text>
-                  )
-                }
+                    Last updated in {folder.name}: {stats?.latest_updated_task?.name} on {moment(stats?.latest_updated_task?.inserted_at).format(dateFormatMonthDayTime)}
+                  </Text>
+                  {
+                    stats?.child_elements.length ? <Text> {capitalizeString(subtask)} count: {stats.child_elements.length} in {folder.name}</Text> : <Text>You have no {folder.name}, open the folder to create some.</Text>
+                  }
+                  {stats?.number_complete && (<Text>
+                    Total Complete Tasks: {stats?.number_complete}
+                  </Text>)}
+                </Box>
               </Box>
-            </Box>
+            </>
           )
         })
       }
