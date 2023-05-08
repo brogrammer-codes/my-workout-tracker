@@ -63,7 +63,6 @@ const WorkoutPage = () => {
     setPageTask(taskTree.find((task) => task?.id === id))
     setPageTaskTree(taskTree.filter((task) => task?.parent_id === id))
   }, [taskTree])
-  // console.log(pageTaskTree, pageTask);
   const completeActivity = (task) => {
     const completeTask = { ...task, complete: true }
     updateTask(completeTask).then(() => console.log(completeTask))
@@ -77,9 +76,7 @@ const WorkoutPage = () => {
     }
     const completeAndSharePlan = () => {
       const completeTask = { ...pageTask, complete: true }
-      updateTask(completeTask).then(
-        copyTaskToShared(pageTask?.id).then(onClose)
-      )
+      updateTask(completeTask).then(() => copyTaskToShared(pageTask?.id).then(onClose))
   
     }
     return (
