@@ -71,8 +71,8 @@ const ProfilePage = () => {
             <Text>Website</Text>
             <Input isDisabled={(!isEditable || !pageProfile)} value={pageProfile?.website} onChange={event => updateProfile('website', event.target.value)} placeholder="Website" />
           </Box>
-          <Text>Favorite Activity</Text>
-          <ActivityPicker isDisabled={!isEditable} activity={{ name: pageProfile?.favorite_activity }} setActivity={(activity) => updateProfile('favorite_activity', activity?.name)} />
+          {/* <Text>Favorite Activity</Text>
+          <ActivityPicker isDisabled={!isEditable} activity={{ name: pageProfile?.favorite_activity }} setActivity={(activity) => updateProfile('favorite_activity', activity?.name)} /> */}
           {isEditable &&
             <Stack spacing={2}>
 
