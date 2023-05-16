@@ -60,7 +60,7 @@ export const ActivityTable = ({ taskTree, pageTask, deleteTask, editTask, update
     const rootElements = taskTree.filter(el => el.parent_id === pageTask?.id);
     return (
       <Box color={'brand.50'}>
-        <Grid templateColumns='repeat(8, 1fr)' gap={2}>
+        <Grid templateColumns='repeat(8, 1fr)' gap={2} overflowY="scroll">
           <GridItem colSpan={1}>Name</GridItem>
           <GridItem>
             <Input
