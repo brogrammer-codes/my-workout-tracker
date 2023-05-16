@@ -23,6 +23,7 @@ export default function App({ Component, pageProps }) {
         100: "#5158BB",
         200: '#043565',
         500: '#223B67',
+        600: "#314E89",
         800: "#1E355B",
         900: "#030508",
       },

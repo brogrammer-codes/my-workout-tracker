@@ -1,10 +1,11 @@
 import React from 'react'
-import { Button, Box, Link, Text, HStack, Tr, Input,  IconButton, Tbody, Grid, GridItem, Container, Popover, PopoverTrigger, PopoverContent, } from '@chakra-ui/react';
+import { Button, Box, Link, Text, HStack, Tr, Input, IconButton, Tbody, Grid, GridItem, Container, Popover, PopoverTrigger, PopoverContent, Divider, } from '@chakra-ui/react';
 import { CheckCircleIcon, SettingsIcon, Icon } from "@chakra-ui/icons";
 import { HiVideoCamera } from 'react-icons/hi'
 import { MdDescription } from 'react-icons/md'
 
 import { DeleteTaskIcon } from '../DeleteTaskIcon';
+import { TableControl } from './TableControl';
 
 
 const TableElement = ({ node, elements, depth, deleteTask, editActivity, isEditable }) => {
@@ -21,7 +22,7 @@ const TableElement = ({ node, elements, depth, deleteTask, editActivity, isEdita
       <GridItem>{node?.tag_5}</GridItem>
       <GridItem>{node?.tag_6}</GridItem>
       <GridItem>
-        <HStack >
+        <TableControl>
           {node?.description && (
             <Popover>
               <PopoverTrigger>
@@ -38,16 +39,19 @@ const TableElement = ({ node, elements, depth, deleteTask, editActivity, isEdita
           {isEditable && (
             <>
               <IconButton colorScheme='brand' aria-label='edit-task-icon' size="sm" icon={<SettingsIcon boxSize={4} />} onClick={() => editActivity(node?.id)} />
-              <DeleteTaskIcon onDelete={() => deleteTask(node?.id)} taskName={node?.name}/>
+              <DeleteTaskIcon onDelete={() => deleteTask(node?.id)} taskName={node?.name} />
             </>
           )}
-        </HStack>
+        </TableControl>
       </GridItem>
       {childElements.map(child => (
         <GridItem key={child.id}>
           <TableElement key={child.id} node={child} elements={elements} addTask={addTask} depth={depth + 1} deleteTask={deleteTask} isEditable={isEditable} />
         </GridItem>
       ))}
+      <GridItem colSpan={8}>
+        <Divider />
+      </GridItem>
     </>
   )
 }
@@ -56,7 +60,7 @@ export const ActivityTable = ({ taskTree, pageTask, deleteTask, editTask, update
     const rootElements = taskTree.filter(el => el.parent_id === pageTask?.id);
     return (
       <Box color={'brand.50'}>
-        <Grid templateColumns='repeat(8, 1fr)' gap={2}>
+        <Grid templateColumns='repeat(8, 1fr)' gap={2} overflowY="scroll">
           <GridItem colSpan={1}>Name</GridItem>
           <GridItem>
             <Input
@@ -114,6 +118,7 @@ export const ActivityTable = ({ taskTree, pageTask, deleteTask, editTask, update
             />
           </GridItem>
           <GridItem>{isEditable && 'Actions'}</GridItem>
+
           {rootElements.map((root) => (
             <TableElement
               key={root.id}
