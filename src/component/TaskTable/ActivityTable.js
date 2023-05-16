@@ -61,7 +61,7 @@ export const ActivityTable = ({ taskTree, pageTask, deleteTask, editTask, update
     return (
       <Box color={'brand.50'}>
         <Grid templateColumns='repeat(8, 1fr)' gap={2}>
-          <GridItem colSpan={1}>Name</GridItem>
+          <GridItem colSpan={1}><Text fontWeight='bold'>Name</Text></GridItem>
           <GridItem>
             <Input
               variant='flushed'
@@ -117,7 +117,7 @@ export const ActivityTable = ({ taskTree, pageTask, deleteTask, editTask, update
               size={'sm'}
             />
           </GridItem>
-          <GridItem>{isEditable && 'Actions'}</GridItem>
+          <GridItem>{isEditable && <Text fontWeight='bold'>Actions</Text>}</GridItem>
 
           {rootElements.map((root) => (
             <TableElement

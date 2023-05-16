@@ -1,4 +1,5 @@
 export const dateFormatMonthDayTime = 'MMM Do [at] h:mm A';
+export const dateFormatMonthDayTimeShort = 'MMM Do';
 
 export const dateFormatMonthDayTimeYear = 'MMM Do [at] h:mm A YYYY';
 
