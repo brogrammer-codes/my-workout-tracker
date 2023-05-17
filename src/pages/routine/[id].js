@@ -6,13 +6,14 @@ import { useRouter } from 'next/router';
 import { TASK_TYPES } from '@/utils/constants';
 import { PlanTable } from '@/component/TaskTable';
 import { searchTypeWithKeyword } from '@/utils/api';
-import moment from 'moment';
-import { dateFormatMonthDayTime } from '@/utils/formats';
+
 import PageLoading from '@/component/PageLoading';
 import Link from 'next/link';
+import { PlanCard } from '@/component/PlanCard';
+
 
 const RoutinePage = () => {
-  const { user, getTaskTree, taskTree, addTask, updateTask, deleteTask, copyTask } = useTaskListContext()
+  const { user, getTaskTree, taskTree, addTask, updateTask, deleteTask, copyTask, taskLoading } = useTaskListContext()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [pageRoutine, setPageRoutine] = useState(null)
   const [newSubTasks, setNewSubTasks] = useState([])
@@ -21,7 +22,8 @@ const RoutinePage = () => {
   const [editTask, setEditTask] = useState(false)
   const router = useRouter();
   const { id } = router.query;
-
+  const newPlan = {name: 'New Plan', type: TASK_TYPES.PLAN, parent_id: pageRoutine?.id}
+  
 
   useEffect(() => {
     if (user?.user) {
@@ -66,6 +68,9 @@ const RoutinePage = () => {
     copyTask(task_id, pageRoutine?.id).then(() => onClose())
 
   }
+  const createNewPlan = () => {
+    addTask(newPlan).then(() => onClose())
+  }
   return (
     <PageLoading isLoading={(!user || !pageRoutine || pageRoutine?.type !== TASK_TYPES.ROUTINE)}>
       <Text as={Link} href={`/folder/${pageRoutine?.parent_id}`}>Return to Folder</Text>
@@ -91,15 +96,10 @@ const RoutinePage = () => {
           margin={5}
           maxW={1000}
         >
+          <PlanCard plan={newPlan} loading={taskLoading} onClick={createNewPlan}/>
           {newSubTasks.map((task) => (
             <GridItem key={task?.id}>
-              <Card bg={'brand.50'} height={'100%'}>
-                <CardHeader onClick={() => copyPlan(task?.id)} cursor={'pointer'}><Heading>{task.name}</Heading></CardHeader>
-                <CardBody>
-                  <Text>{task?.description}</Text>
-                  <Text>Created on: {moment(task?.inserted_at).format(dateFormatMonthDayTime)}</Text>
-                </CardBody>
-              </Card>
+              <PlanCard plan={task} loading={taskLoading} onClick={copyPlan}/>
 
             </GridItem>
           ))}

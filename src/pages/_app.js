@@ -20,6 +20,7 @@ export default function App({ Component, pageProps }) {
       },
       brand: {
         50: "#E2E2E2",
+        150: "#D9DEE9",
         100: "#5158BB",
         200: '#043565',
         500: '#223B67',
