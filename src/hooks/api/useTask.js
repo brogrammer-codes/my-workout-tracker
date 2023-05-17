@@ -82,6 +82,7 @@ export const useTask = () => {
   };
 
   const copyTask = async (task_id, parent_id=null) => {
+    setloading(true)
     await cloneTask(task_id, parent_id).then(({task}) => {
       setTaskTree([...taskTree, task])
       toast({
@@ -91,6 +92,7 @@ export const useTask = () => {
         duration: 4000,
         isClosable: true,
       })
+      setloading(false)
     }).catch((e) => setError(e))
   };
   
@@ -108,6 +110,6 @@ export const useTask = () => {
     }).catch((e) => setError(e))
   }
   
-  return { error, loading, getTaskTree, taskTree, addTask, updateTask, deleteTask, copyTask, copyTaskToShared }
+  return { error, loading, getTaskTree, taskTree, addTask, updateTask, deleteTask, copyTask, copyTaskToShared, setTaskTree }
 
 }
