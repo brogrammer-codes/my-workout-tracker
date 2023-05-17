@@ -18,7 +18,7 @@ const TableElement = ({ node, elements, depth, deleteTask, editActivity, isEdita
         <GridItem>{node?.complete && <CheckCircleIcon color={'brandCard.50'} />} {node.name}</GridItem>
         {
           TASK_TAGS.map((tag) => (
-            <GridItem>{node[tag]}</GridItem>
+            <GridItem key={`tag-${tag}`}>{node[tag]}</GridItem>
           ))
         }
         <GridItem>
@@ -65,7 +65,7 @@ export const ActivityTable = ({ taskTree, pageTask, deleteTask, editTask, update
           <GridItem colSpan={1}><Text fontWeight='bold'>Name</Text></GridItem>
           {
             TASK_TAGS.map((tag) => (
-              <GridItem>
+              <GridItem key={`tag-${tag}`}>
                 <Input
                   variant='flushed'
                   value={pageTask[tag]}
