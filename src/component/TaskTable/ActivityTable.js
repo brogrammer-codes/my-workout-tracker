@@ -6,54 +6,55 @@ import { MdDescription } from 'react-icons/md'
 
 import { DeleteTaskIcon } from '../DeleteTaskIcon';
 import { TableControl } from './TableControl';
+import { TASK_TAGS, TASK_TYPES } from '@/utils/constants';
 
 
 const TableElement = ({ node, elements, depth, deleteTask, editActivity, isEditable }) => {
   const childElements = elements.filter(el => el.parent_id === node.id);
   // check node type here and render the correct list item
+  if (node?.type === TASK_TYPES.ACTIVITY) {
+    return (
+      <>
+        <GridItem>{node?.complete && <CheckCircleIcon color={'brandCard.50'} />} {node.name}</GridItem>
+        {
+          TASK_TAGS.map((tag) => (
+            <GridItem>{node[tag]}</GridItem>
+          ))
+        }
+        <GridItem>
+          <TableControl>
+            {node?.description && (
+              <Popover>
+                <PopoverTrigger>
+                  <IconButton size="sm" icon={<Icon as={MdDescription} boxSize={5} />} colorScheme='brand' />
 
-  return (
-    <>
-      <GridItem>{node?.complete && <CheckCircleIcon color={'brandCard.50'} />} {node.name}</GridItem>
-      <GridItem>{node?.tag_1}</GridItem>
-      <GridItem>{node?.tag_2}</GridItem>
-      <GridItem>{node?.tag_3}</GridItem>
-      <GridItem>{node?.tag_4}</GridItem>
-      <GridItem>{node?.tag_5}</GridItem>
-      <GridItem>{node?.tag_6}</GridItem>
-      <GridItem>
-        <TableControl>
-          {node?.description && (
-            <Popover>
-              <PopoverTrigger>
-                <IconButton size="sm" icon={<Icon as={MdDescription} boxSize={5} />} colorScheme='brand' />
-
-              </PopoverTrigger>
-              <PopoverContent color='brand.50' bg={'brand.500'} padding={3}>
-                {node.description}
-              </PopoverContent>
-            </Popover>
-          )
-          }
-          {node?.video_url && (<IconButton colorScheme='brand' aria-label='video-task-icon' size="sm" icon={<Icon as={HiVideoCamera} boxSize={5} />} as={Link} href={node.video_url} isExternal />)}
-          {isEditable && (
-            <>
-              <IconButton colorScheme='brand' aria-label='edit-task-icon' size="sm" icon={<SettingsIcon boxSize={4} />} onClick={() => editActivity(node?.id)} />
-              <DeleteTaskIcon onDelete={() => deleteTask(node?.id)} taskName={node?.name} />
-            </>
-          )}
-        </TableControl>
-      </GridItem>
-      {childElements.map(child => (
-        <GridItem key={child.id}>
-          <TableElement key={child.id} node={child} elements={elements} addTask={addTask} depth={depth + 1} deleteTask={deleteTask} isEditable={isEditable} />
+                </PopoverTrigger>
+                <PopoverContent color='brand.50' bg={'brand.500'} padding={3}>
+                  {node.description}
+                </PopoverContent>
+              </Popover>
+            )
+            }
+            {node?.video_url && (<IconButton colorScheme='brand' aria-label='video-task-icon' size="sm" icon={<Icon as={HiVideoCamera} boxSize={5} />} as={Link} href={node.video_url} isExternal />)}
+            {isEditable && (
+              <>
+                <IconButton colorScheme='brand' aria-label='edit-task-icon' size="sm" icon={<SettingsIcon boxSize={4} />} onClick={() => editActivity(node?.id)} />
+                <DeleteTaskIcon onDelete={() => deleteTask(node?.id)} taskName={node?.name} />
+              </>
+            )}
+          </TableControl>
         </GridItem>
-      ))}
-      <GridItem colSpan={8}>
-        <Divider />
-      </GridItem>
-    </>
-  )
+        {childElements.map(child => (
+          <GridItem key={child.id}>
+            <TableElement key={child.id} node={child} elements={elements} addTask={addTask} depth={depth + 1} deleteTask={deleteTask} isEditable={isEditable} />
+          </GridItem>
+        ))}
+        <GridItem colSpan={8}>
+          <Divider />
+        </GridItem>
+      </>
+    )
+  }
 }
 export const ActivityTable = ({ taskTree, pageTask, deleteTask, editTask, updatePagePlan, editActivity, isEditable }) => {
   if (taskTree.length) {
@@ -62,61 +63,19 @@ export const ActivityTable = ({ taskTree, pageTask, deleteTask, editTask, update
       <Box color={'brand.50'}>
         <Grid templateColumns='repeat(8, 1fr)' gap={2}>
           <GridItem colSpan={1}><Text fontWeight='bold'>Name</Text></GridItem>
-          <GridItem>
-            <Input
-              variant='flushed'
-              value={pageTask?.tag_1}
-              onChange={(event) => updatePagePlan('tag_1', event.target.value)}
-              isDisabled={!editTask}
-              size={'sm'}
-            />
-          </GridItem>
-          <GridItem>
-            <Input
-              variant='flushed'
-              value={pageTask?.tag_2}
-              onChange={(event) => updatePagePlan('tag_2', event.target.value)}
-              isDisabled={!editTask}
-              size={'sm'}
-            />
-
-          </GridItem>
-          <GridItem>
-            <Input
-              variant='flushed'
-              value={pageTask?.tag_3}
-              onChange={(event) => updatePagePlan('tag_3', event.target.value)}
-              isDisabled={!editTask}
-              size={'sm'}
-            />
-          </GridItem>
-          <GridItem>
-            <Input
-              variant='flushed'
-              value={pageTask?.tag_4}
-              onChange={(event) => updatePagePlan('tag_4', event.target.value)}
-              isDisabled={!editTask}
-              size={'sm'}
-            />
-          </GridItem>
-          <GridItem>
-            <Input
-              variant='flushed'
-              value={pageTask?.tag_5}
-              onChange={(event) => updatePagePlan('tag_5', event.target.value)}
-              isDisabled={!editTask}
-              size={'sm'}
-            />
-          </GridItem>
-          <GridItem>
-            <Input
-              variant='flushed'
-              value={pageTask?.tag_6}
-              onChange={(event) => updatePagePlan('tag_6', event.target.value)}
-              isDisabled={!editTask}
-              size={'sm'}
-            />
-          </GridItem>
+          {
+            TASK_TAGS.map((tag) => (
+              <GridItem>
+                <Input
+                  variant='flushed'
+                  value={pageTask[tag]}
+                  onChange={(event) => updatePagePlan(tag, event.target.value)}
+                  isDisabled={!editTask}
+                  size={'sm'}
+                />
+              </GridItem>
+            ))
+          }
           <GridItem>{isEditable && <Text fontWeight='bold'>Actions</Text>}</GridItem>
 
           {rootElements.map((root) => (
